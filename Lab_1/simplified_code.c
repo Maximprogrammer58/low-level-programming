@@ -4,9 +4,9 @@
 #include <stdio.h>
 
 int main() {
-	int n; 
-	int arr[SIZE];
-	int i = 0;
+	int n;         // r8d
+	int arr[SIZE]; // array
+	int i = 0;     // ecx
 
 	scanf("%d", &n);
 
@@ -17,14 +17,20 @@ input_start:
 	goto input_start;
 input_end:
 	i = 0;
-	int key, j;
+	int key;   // r9d 
+	int tmp;   // r10d
+	int j;     // r11d
 sort_out_loop_start:
 	if (i == n) goto sort_out_loop_end;
 	key = arr[i];
-	j = i - 1;
+	tmp = i;
+	--tmp;
+	j = tmp;
 sort_inner_loop_start:
-	if (!(j >= 0 && arr[j] > key)) goto sort_inner_loop_end;
-	arr[j + 1] = arr[j];
+	if (j < 0) goto sort_inner_loop_end;
+	if (arr[j] <= key) goto sort_inner_loop_end;
+	int mov_tmp = arr[j];
+	arr[j + 1] = mov_tmp;
 	j -= 1;
 	goto sort_inner_loop_start;
 sort_inner_loop_end:
