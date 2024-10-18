@@ -10,7 +10,7 @@ main:
     ; x = arctg(1/(log2(a)))
     fld1
     fld dword[a]
-    fyl2x
+    fyl2x     ; ST1=ST1*log2(ST0), top++           
     fld1
     fxch st0, st1
     fpatan

@@ -1,11 +1,11 @@
 %include "io64.inc"
 
 section .rodata
-    a: dd 3.0
+    a: dd 1.0
     e: dd 2.71828
     two: dd 2.0
-    x: dd 2.0
-    y: dd -8.0
+    x: dd 3.0
+    y: dd -11.0
    
 section .text
 global main
@@ -41,23 +41,23 @@ main:
     ; (e^x - e^(-x)) / 2
     fsub
     fld dword[two]
-    fxch st0, st1
-    fdivr
+    fdiv
     
     ; sinh(x) - a
     fld dword[a]
     fsub
     
     fld dword[y]
-    fcompp
-    jle false
-    PRINT_DEC 4, 1
-    jmp end
-    
-false:
+    fcomip st1
+    ja .true
     PRINT_DEC 4, 0
+    jmp .end
     
-end:
+.true:
+    PRINT_DEC 4, 1
+    jmp .end
+    
+.end:
     fstp st0
     xor rax, rax
     ret

@@ -1,10 +1,10 @@
 %include "io64.inc"
     
 section .data
-space db ' ', 0  
+    space db ' ', 0  
 
 section .bss
-arr: resd 100
+    arr: resd 100
 
 section .text
 global main
@@ -22,10 +22,10 @@ main:
 .sort_out_loop_start:
     cmp ecx, r8d
     je .sort_out_loop_end
-    mov r9d, [arr + 4*ecx]
-    mov r10d, ecx
-    sub r10d, 1
-    mov r11d, r10d
+    mov r9d, [arr + 4*ecx]  ; key = arr[i]
+    mov r10d, ecx           ; tmp = i
+    sub r10d, 1        
+    mov r11d, r10d          ; j = tmp
 .sort_inner_loop_start:
     cmp r11d, 0
     jl .sort_inner_loop_end
