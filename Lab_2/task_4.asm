@@ -12,6 +12,7 @@ global main
 main:
     ; y > sinh(x) - a
     ; sinh(x) = (e^x - e^(-x))/ 2
+    ; e x ^ e x - ^ - 2 /
  
     ; e^x
     fld dword[x]
@@ -26,17 +27,8 @@ main:
     fstp st1
     
     ; e^(-x)
-    fld dword[x]
-    fchs
-    fld dword[e]
-    fyl2x
     fld1
-    fld st1
-    fprem
-    f2xm1
-    fadd
-    fscale
-    fstp st1
+    fdiv st0, st1
     
     ; (e^x - e^(-x)) / 2
     fsub
